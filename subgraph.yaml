@@ -1,14 +1,14 @@
-specVersion: 0.0.5
+specVersion: 0.0.6
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: substreams
-    name: apecoin
+    name: grt
     network: mainnet
     source:
       package:
         moduleName: graph_out
-        file: ./apecoin-v1.0.0.spkg
+        file: ./grt-v1.0.0.spkg
     mapping:
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       kind: substreams/graph-entities

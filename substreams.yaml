@@ -1,6 +1,6 @@
 specVersion: v0.1.0
 package:
-  name: 'apecoin'
+  name: "GRT"
   version: v1.0.0
 
 imports:
@@ -8,7 +8,7 @@ imports:
 
 protobuf:
   files:
-    - apecoin.proto
+    - grt.proto
   importPaths:
     - ./proto
 
@@ -18,17 +18,28 @@ binaries:
     file: ./target/wasm32-unknown-unknown/release/substreams.wasm
 
 modules:
+  ## Transfer Event
   - name: map_transfer
     kind: map
-    initialBlock: 14204533
+    initialBlock: 11446768
     inputs:
       - source: sf.ethereum.type.v2.Block
     output:
-      type: proto:eth.apecoin.v1.Transfers
+      type: proto:eth.grt.v1.Transfers
+
+  ## Approval Event
+  - name: map_approval
+    kind: map
+    initialBlock: 11446768
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:eth.grt.v1.Approvals
 
   - name: graph_out
     kind: map
     inputs:
       - map: map_transfer
+      - map: map_approval
     output:
       type: proto:substreams.entity.v1.EntityChanges

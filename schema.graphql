@@ -8,3 +8,14 @@ type Transfer @entity {
   blockNumber: BigInt!
   logIndex: BigInt!
 }
+
+type Approval @entity {
+  id: ID!
+  owner: String!
+  spender: String!
+  value: String!
+  timestamp: BigInt!
+  txHash: String!
+  blockNumber: BigInt!
+  logIndex: BigInt!
+}
