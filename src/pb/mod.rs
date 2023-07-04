@@ -8,13 +8,6 @@ pub mod eth {
         }
     }
 }
-pub mod google {
-    // @@protoc_insertion_point(attribute:google.protobuf)
-    pub mod protobuf {
-        include!("google.protobuf.rs");
-        // @@protoc_insertion_point(google.protobuf)
-    }
-}
 pub mod sf {
     pub mod substreams {
         pub mod rpc {

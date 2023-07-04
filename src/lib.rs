@@ -5,7 +5,7 @@ mod utils;
 use crate::utils::helper::{append_0x, generate_id};
 use abi::abi::grt::v1 as grt_events;
 
-use pb::eth::grt::v1::{self as grt, Approvals};
+use pb::eth::grt::v1::{self as grt};
 use substreams::{log, Hex};
 use substreams_entity_change::{pb::entity::EntityChanges, tables::Tables};
 use substreams_ethereum::pb::eth;
