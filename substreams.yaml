@@ -21,7 +21,7 @@ modules:
   ## Transfer Event
   - name: map_transfer
     kind: map
-    initialBlock: 11446768
+    initialBlock: 13325304
     inputs:
       - source: sf.ethereum.type.v2.Block
     output:
@@ -30,7 +30,7 @@ modules:
   ## Approval Event
   - name: map_approval
     kind: map
-    initialBlock: 11446768
+    initialBlock: 13325304
     inputs:
       - source: sf.ethereum.type.v2.Block
     output:

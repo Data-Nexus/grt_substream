@@ -18,18 +18,14 @@ fn map_transfer(block: eth::v2::Block) -> Result<grt::Transfers, Error> {
     Ok(grt::Transfers {
         transfers: block
             .events::<grt_events::events::Transfer>(&[&GRT_CONTRACT])
-            .map(|(transfer, log)| {
-                log::info!("GRT Transfer Event");
-
-                grt::Transfer {
-                    from: append_0x(&Hex(transfer.from).to_string()),
-                    to: append_0x(&Hex(transfer.to).to_string()),
-                    block_number: block.number,
-                    timestamp: block.timestamp_seconds(),
-                    amount: transfer.value.to_string(),
-                    tx_hash: append_0x(&Hex(&log.receipt.transaction.hash).to_string()),
-                    log_index: log.index(),
-                }
+            .map(|(transfer, log)| grt::Transfer {
+                from: append_0x(&Hex(transfer.from).to_string()),
+                to: append_0x(&Hex(transfer.to).to_string()),
+                block_number: block.number,
+                timestamp: block.timestamp_seconds(),
+                amount: transfer.value.to_string(),
+                tx_hash: append_0x(&Hex(&log.receipt.transaction.hash).to_string()),
+                log_index: log.index(),
             })
             .collect(),
     })
@@ -40,18 +36,14 @@ fn map_approval(block: eth::v2::Block) -> Result<grt::Approvals, Error> {
     Ok(grt::Approvals {
         approvals: block
             .events::<grt_events::events::Approval>(&[&GRT_CONTRACT])
-            .map(|(approval, log)| {
-                log::info!("GRT Approval Event");
-
-                grt::Approval {
-                    owner: append_0x(&Hex(approval.owner).to_string()),
-                    spender: append_0x(&Hex(approval.spender).to_string()),
-                    value: approval.value.to_string(),
-                    block_number: block.number,
-                    timestamp: block.timestamp_seconds(),
-                    tx_hash: append_0x(&Hex(&log.receipt.transaction.hash).to_string()),
-                    log_index: log.index(),
-                }
+            .map(|(approval, log)| grt::Approval {
+                owner: append_0x(&Hex(approval.owner).to_string()),
+                spender: append_0x(&Hex(approval.spender).to_string()),
+                value: approval.value.to_string(),
+                block_number: block.number,
+                timestamp: block.timestamp_seconds(),
+                tx_hash: append_0x(&Hex(&log.receipt.transaction.hash).to_string()),
+                log_index: log.index(),
             })
             .collect(),
     })
@@ -87,6 +79,5 @@ fn graph_out(transfers: grt::Transfers, approvals: grt::Approvals) -> Result<Ent
         row.set("owner", &approval.owner);
     }
     let entity_changes = tables.to_entity_changes();
-    log::info!("Entity changes: {:?}", entity_changes);
     Ok(entity_changes)
 }
