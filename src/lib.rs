@@ -29,6 +29,7 @@ fn map_transfer(block: eth::v2::Block) -> Result<grt::Transfers, Error> {
                     amount: transfer.value.to_string(),
                     tx_hash: append_0x(&Hex(&log.receipt.transaction.hash).to_string()),
                     log_index: log.index(),
+                    gas_used: log.receipt.transaction.gas_used,
                 }
             })
             .collect(),
@@ -51,6 +52,7 @@ fn map_approval(block: eth::v2::Block) -> Result<grt::Approvals, Error> {
                     timestamp: block.timestamp_seconds(),
                     tx_hash: append_0x(&Hex(&log.receipt.transaction.hash).to_string()),
                     log_index: log.index(),
+                    gas_used: log.receipt.transaction.gas_used,
                 }
             })
             .collect(),
@@ -72,6 +74,7 @@ fn graph_out(transfers: grt::Transfers, approvals: grt::Approvals) -> Result<Ent
         row.set("amount", &transfer.amount);
         row.set("sender", &transfer.from);
         row.set("receiver", &transfer.to);
+        row.set("gas_used", transfer.gas_used);
     }
 
     for approval in &approvals.approvals {
@@ -85,8 +88,8 @@ fn graph_out(transfers: grt::Transfers, approvals: grt::Approvals) -> Result<Ent
         row.set("value", &approval.value);
         row.set("spender", &approval.spender);
         row.set("owner", &approval.owner);
+        row.set("gas_used", approval.gas_used);
     }
     let entity_changes = tables.to_entity_changes();
-    log::info!("Entity changes: {:?}", entity_changes);
     Ok(entity_changes)
 }

@@ -16,6 +16,8 @@ pub struct Transfer {
     pub timestamp: u64,
     #[prost(uint32, tag="13")]
     pub log_index: u32,
+    #[prost(uint64, tag="14")]
+    pub gas_used: u64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -40,6 +42,8 @@ pub struct Approval {
     pub timestamp: u64,
     #[prost(uint32, tag="13")]
     pub log_index: u32,
+    #[prost(uint64, tag="14")]
+    pub gas_used: u64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

@@ -10,6 +10,7 @@ message Transfer {
   uint64 block_number = 11;
   uint64 timestamp = 12;
   uint32 log_index = 13;
+  uint64 gas_used = 14;
 }
 
 message Transfers {
@@ -24,8 +25,17 @@ message Approval {
   uint64 block_number = 11;
   uint64 timestamp = 12;
   uint32 log_index = 13;
+  uint64 gas_used = 14;
 }
 
 message Approvals {
   repeated Approval approvals = 1;
+}
+
+message Account {
+  uint64 balance = 2;
+}
+
+message Accounts {
+  repeated Account accounts = 1;
 }
